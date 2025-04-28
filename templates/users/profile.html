@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}โปรไฟล์ - โมบายสโตร์{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">บัญชีของฉัน</h5>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="{% url 'profile' %}" class="list-group-item list-group-item-action active">
+                        <i class="fas fa-user me-2"></i> ข้อมูลส่วนตัว
+                    </a>
+                    <a href="{% url 'order_history' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-shopping-bag me-2"></i> ประวัติการสั่งซื้อ
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fas fa-heart me-2"></i> รายการโปรด
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fas fa-address-card me-2"></i> ที่อยู่จัดส่ง
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fas fa-lock me-2"></i> เปลี่ยนรหัสผ่าน
+                    </a>
+                </div>
+            </div>
+            
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <p class="mb-2">ต้องการความช่วยเหลือ?</p>
+                    <a href="#" class="btn btn-outline-primary">ติดต่อเรา</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">ข้อมูลส่วนตัว</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h6 class="mb-3">ข้อมูลบัญชี</h6>
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3">
+                                {{ u_form.username|as_crispy_field }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ u_form.email|as_crispy_field }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ u_form.first_name|as_crispy_field }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ u_form.last_name|as_crispy_field }}
+                            </div>
+                        </div>
+                        
+                        <h6 class="mb-3">ข้อมูลติดต่อ</h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                {{ p_form.phone|as_crispy_field }}
+                            </div>
+                            <div class="col-12">
+                                {{ p_form.address|as_crispy_field }}
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid d-md-flex justify-content-md-end mt-4">
+                            <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
